@@ -1,22 +1,14 @@
-/// <reference types="vitest" />
+import path from "path"
+import tailwindcss from "@tailwindcss/vite"
+import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite"
 
-import { defineConfig } from 'vite'
-
-import legacy from '@vitejs/plugin-legacy'
-import react from '@vitejs/plugin-react'
-
-import { VitePWA } from 'vite-plugin-pwa';
-
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    legacy(),
-    VitePWA({ registerType: 'autoUpdate' })
-  ],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/setupTests.ts',
-  }
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
 })
