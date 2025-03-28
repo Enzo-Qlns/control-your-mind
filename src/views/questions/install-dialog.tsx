@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 
 import { useQuestion } from "@/hooks/use-question";
 
+import { isIos } from "@/lib/utils";
+
 interface BeforeInstallPromptEvent extends Event {
     prompt: () => void;
     userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
@@ -22,14 +24,8 @@ const InstallDialog: React.FC = () => {
     } = useQuestion();
 
     const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-    const [isIos, setIsIos] = useState<boolean>(false);
-    const [isStandalone, setIsStandalone] = useState<boolean>(false);
 
     useEffect(() => {
-        const userAgent = window.navigator.userAgent.toLowerCase();
-        setIsIos(/iphone|ipad|ipod/.test(userAgent));
-        setIsStandalone(window.matchMedia('(display-mode: standalone)').matches);
-
         const handleBeforeInstallPrompt = (e: Event) => {
             e.preventDefault();
             setDeferredPrompt(e as BeforeInstallPromptEvent);
@@ -51,8 +47,6 @@ const InstallDialog: React.FC = () => {
         }
     };
 
-    if (isStandalone) return null;
-
     return (
         <Dialog open={openInstallDialog} onOpenChange={setOpenInstallDialog}>
             <DialogContent>
@@ -70,7 +64,7 @@ const InstallDialog: React.FC = () => {
                                 Installer
                             </Button>
                         </>
-                    ) : isIos ? (
+                    ) : isIos() ? (
                         <>
                             <p>Ajoutez l'application :</p>
                             <ol className="list-decimal ml-5 mt-2">

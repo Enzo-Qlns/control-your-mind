@@ -10,6 +10,8 @@ import { Particles } from "@/components/magicui/particles";
 
 import QuestionsProvider from "@/providers/question";
 
+import { isStandalone } from "@/lib/utils";
+
 import questions from "../../ressources/questions.json";
 
 const Home: React.FC = () => {
@@ -73,7 +75,7 @@ const Home: React.FC = () => {
             setOpenInstallDialog={setOpenInstallDialog}
             end={end}
         >
-            <ContentLayout className="min-h-screen p-4">
+            <ContentLayout className="min-h-screen p-4 overflow-hidden">
                 <h1 className="text-2xl font-bold mb-4 text-center">Controls your mind</h1>
                 <div className="flex flex-col justify-center items-center h-[calc(100vh-5rem)]">
                     <motion.div
@@ -82,19 +84,21 @@ const Home: React.FC = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="-mt-8"
+                        className="-mt-20 mb-4"
                     >
                         <NeonGradientCard className="max-w-sm">
                             <p className="text-gray-500">Question</p>
                             <h2 className="text-xl font-semibold">{questions[currentIndex]}</h2>
                         </NeonGradientCard>
                     </motion.div>
-                    <Button
-                        className="fixed bottom-4 left-4"
-                        onClick={() => setOpenInstallDialog(true)}
-                    >
-                        <Download /> Installer l'application
-                    </Button>
+                    {!isStandalone() && (
+                        <Button
+                            className="fixed bottom-4 left-4"
+                            onClick={() => setOpenInstallDialog(true)}
+                        >
+                            <Download /> Installer l'application
+                        </Button>
+                    )}
 
                     <CoolMode>
                         <Button
