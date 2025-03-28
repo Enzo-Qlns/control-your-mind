@@ -1,7 +1,0 @@
-{
-  "name": "control-your-mind",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react-vite"
-}
