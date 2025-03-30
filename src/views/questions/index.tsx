@@ -76,7 +76,7 @@ const Home: React.FC = () => {
             end={end}
         >
             <ContentLayout className="min-h-screen p-4">
-                <h1 className="text-2xl font-bold mb-4 text-center">Controls your mind</h1>
+                <h1 className="text-2xl font-bold mb-4 text-center">Control your mind</h1>
                 <div className="flex flex-col justify-center items-center h-[calc(100vh-5rem)]">
                     <motion.div
                         key={currentIndex}
