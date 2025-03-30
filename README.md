@@ -13,16 +13,20 @@ Control Your Mind est une application inspirée du jeu de société [deifiedyour
     ```bash
     cd control-your-mind
     ```
-3. Installez les dépendances :
+3. Installer pnpm (si pas déjà fais)
     ```bash
-    npm install
+    npm -g pnpm
+    ```
+4. Installez les dépendances :
+    ```bash
+    pnpm i
     ```
 
 ## Utilisation
 
 Lancez l'application en local :
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ## Contribution
